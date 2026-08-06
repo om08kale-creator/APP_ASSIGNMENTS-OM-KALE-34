@@ -1,0 +1,57 @@
+# Employee Management System
+
+class Employee:
+    def __init__(self, emp_id, name, salary):
+        self.emp_id = emp_id
+        self.name = name
+        self.salary = salary
+
+    # Function to decide salary category
+    def category(self):
+        if self.salary >= 70000:
+            return "High Salary"
+        elif self.salary >= 40000:
+            return "Medium Salary"
+        else:
+            return "Low Salary"
+
+    # Function to display employee details
+    def display(self):
+        print("Employee ID :", self.emp_id)
+        print("Name        :", self.name)
+        print("Salary      : ₹", self.salary)
+        print("Category    :", self.category())
+        print("-" * 30)
+
+
+class Company:
+    def __init__(self):
+        self.employee_list = []
+
+    # Add employee
+    def add_employee(self, employee):
+        self.employee_list.append(employee)
+
+    # Display all employees
+    def show_employees(self):
+        print("\n------ Employee Details ------")
+        for employee in self.employee_list:
+            employee.display()
+
+
+# Main Program
+company = Company()
+
+n = int(input("Enter number of employees: "))
+
+for i in range(n):
+    print("\nEnter details of Employee", i + 1)
+
+    emp_id = input("Employee ID: ")
+    name = input("Employee Name: ")
+    salary = float(input("Salary: ₹"))
+
+    emp = Employee(emp_id, name, salary)
+    company.add_employee(emp)
+
+company.show_employees()
