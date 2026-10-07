@@ -1,0 +1,27 @@
+# Fibonacci Using Tabulation (Bottom-Up Dynamic Programming)
+
+# Accept N
+n = int(input("Enter N: "))
+
+# Create a DP table
+fib = [0] * (n + 1)
+
+# Base cases
+if n >= 1:
+    fib[1] = 1
+
+# Build the solution iteratively
+for i in range(2, n + 1):
+    fib[i] = fib[i - 1] + fib[i - 2]
+
+# Display the Fibonacci sequence
+print("Fibonacci sequence:")
+print(*fib)
+
+
+# ---------------- SAMPLE INPUT ----------------
+# Enter N: 10
+
+# ---------------- SAMPLE OUTPUT ----------------
+# Fibonacci sequence:
+# 0 1 1 2 3 5 8 13 21 34 55
