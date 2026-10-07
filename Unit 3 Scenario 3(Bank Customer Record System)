@@ -1,0 +1,108 @@
+# Bank Customer Record System
+# Reads customer records from customers.csv
+# Uses Regular Expressions to validate Account Number
+
+import csv
+import re
+
+# Read customer records from customers.csv
+with open("customers.csv", "r", newline="") as file:
+    reader = csv.DictReader(file)
+    customers = list(reader)
+
+# Display all customer details
+print("\n--- All Customer Details ---")
+
+for customer in customers:
+    print("Account Number :", customer["Account Number"])
+    print("Name           :", customer["Name"])
+    print("Account Type   :", customer["Account Type"])
+    print("Balance        :", customer["Balance"])
+    print("Phone          :", customer["Phone"])
+    print("-----------------------------")
+
+# Accept account number
+account_number = input("\nEnter Account Number to search: ")
+
+# Regular Expression validation
+# Account number format: ACC followed by 6 digits
+pattern = r"^ACC[0-9]{6}$"
+
+if not re.match(pattern, account_number):
+    print("Invalid Account Number format.")
+    print("Account number must be in the format ACC followed by 6 digits.")
+else:
+    # Search for the customer
+    found = False
+
+    for customer in customers:
+        if customer["Account Number"] == account_number:
+            print("\n--- Customer Found ---")
+            print("Account Number :", customer["Account Number"])
+            print("Name           :", customer["Name"])
+            print("Account Type   :", customer["Account Type"])
+            print("Balance        :", customer["Balance"])
+            print("Phone          :", customer["Phone"])
+            found = True
+            break
+
+    if not found:
+        print("Customer not found.")
+
+
+# =========================================================
+# SAMPLE customers.csv FILE
+# =========================================================
+#
+# Account Number,Name,Account Type,Balance,Phone
+# ACC100001,Rahul Sharma,Savings,25000,9876543210
+# ACC100002,Priya Patil,Current,45000,9876501234
+# ACC100003,Amit Kumar,Savings,30000,9988776655
+# ACC100004,Neha Singh,Savings,55000,9123456789
+
+
+# =========================================================
+# SAMPLE INPUT
+# =========================================================
+#
+# Enter Account Number to search: ACC100002
+
+
+# =========================================================
+# SAMPLE OUTPUT
+# =========================================================
+#
+# --- All Customer Details ---
+# Account Number : ACC100001
+# Name           : Rahul Sharma
+# Account Type   : Savings
+# Balance        : 25000
+# Phone          : 9876543210
+# -----------------------------
+# Account Number : ACC100002
+# Name           : Priya Patil
+# Account Type   : Current
+# Balance        : 45000
+# Phone          : 9876501234
+# -----------------------------
+# Account Number : ACC100003
+# Name           : Amit Kumar
+# Account Type   : Savings
+# Balance        : 30000
+# Phone          : 9988776655
+# -----------------------------
+# Account Number : ACC100004
+# Name           : Neha Singh
+# Account Type   : Savings
+# Balance        : 55000
+# Phone          : 9123456789
+# -----------------------------
+#
+# Enter Account Number to search: ACC100002
+#
+# --- Customer Found ---
+# Account Number : ACC100002
+# Name           : Priya Patil
+# Account Type   : Current
+# Balance        : 45000
+# Phone          : 9876501234
