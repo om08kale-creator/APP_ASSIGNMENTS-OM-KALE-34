@@ -1,0 +1,38 @@
+# 0/1 Knapsack Problem using Dynamic Programming
+
+# Accept item weights and values
+weights = list(map(int, input("Enter item weights separated by spaces: ").split()))
+values = list(map(int, input("Enter item values separated by spaces: ").split()))
+
+# Accept bag capacity
+capacity = int(input("Enter bag capacity: "))
+
+# Number of items
+n = len(weights)
+
+# Create DP table
+dp = [[0 for _ in range(capacity + 1)] for _ in range(n + 1)]
+
+# Dynamic Programming
+for i in range(1, n + 1):
+    for w in range(1, capacity + 1):
+
+        if weights[i - 1] <= w:
+            dp[i][w] = max(
+                values[i - 1] + dp[i - 1][w - weights[i - 1]],
+                dp[i - 1][w]
+            )
+        else:
+            dp[i][w] = dp[i - 1][w]
+
+# Display maximum obtainable value
+print("Maximum obtainable value:", dp[n][capacity])
+
+
+# ---------------- SAMPLE INPUT ----------------
+# Enter item weights separated by spaces: 2 3 4 5
+# Enter item values separated by spaces: 3 4 5 6
+# Enter bag capacity: 5
+
+# ---------------- SAMPLE OUTPUT ----------------
+# Maximum obtainable value: 7
