@@ -1,0 +1,17 @@
+import re
+text = """
+hello , everyone 
+hope you are not seeing this but unfortunately if you do
+Contact me at no_contact@gmail.com for no information.
+You can also email no_email9@gmail.com or dont_need_to_123@yahoo.com.
+"""
+pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+emails = re.findall(pattern, text)
+print("Extracted email addresses:")
+for email in emails:
+    print(email)
+output :
+Extracted email addresses:
+no_contact@gmail.com
+no_email9@gmail.com
+t_need_to_123@yahoo.com
